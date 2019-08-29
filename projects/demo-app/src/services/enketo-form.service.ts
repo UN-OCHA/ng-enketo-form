@@ -8,11 +8,9 @@ const FORM_URL = "https://forms-app-xslx-dev.s3.amazonaws.com/public";
 const SUBMISSION_URL = "https://yqtqjifgk0.execute-api.us-east-1.amazonaws.com/dev/xsubmissions";
 
 @Injectable()
-export class EnketoFormService {//implements IEnketoFormService {
+export class EnketoFormService implements IEnketoFormService {
 
-  constructor(private http: HttpClient) {
-    // super();
-  }
+  constructor(private http: HttpClient) {}
 
   getForm(formId: string): Observable<any> {
     return this.http.get<any>(`${FORM_URL}/${formId}.json`);

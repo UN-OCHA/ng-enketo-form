@@ -13,10 +13,6 @@ import EnketoForm from './enketo-form';
   styleUrls: ['./enketo-form.component.scss']
 })
 export class EnketoFormComponent implements OnInit {
-  // getForm: (formId: string) => Observable<any>;
-  // getSubmission: (submissionId: string) => Observable<any>;
-  // addSubmission: (data: string) => Observable<any>;
-  // updateSubmission: (submissionId: string, data: string) => Observable<any>;
 
   @Input() formId: string;
   @Input() submissionId: string;
@@ -26,23 +22,11 @@ export class EnketoFormComponent implements OnInit {
   private xform: any;
   private eform: any;
 
-  // constructor(@Inject(ENKETO_FORM_SERVICE) private svc: IEnketoFormService) { }
-  constructor(@Inject(ENKETO_FORM_SERVICE) private svc: any) {
-    console.log('===============================');
-    console.log('===============================');
-    console.log(svc);
-    console.log('===============================');
-    console.log('===============================');
-  }
-  // constructor(@Inject(ENKETO_FORM_SERVICE) svc: any) {
+  constructor(@Inject(ENKETO_FORM_SERVICE) private svc: IEnketoFormService) { }
+  // constructor(@Inject(ENKETO_FORM_SERVICE) private svc: any) {
   //   console.log('===============================');
   //   console.log('===============================');
   //   console.log(svc);
-  //   this.svc = svc;
-  //   // this.getForm = svc.getForm || function() {};
-  //   // this.getSubmission = svc.getSubmission || function() {};
-  //   // this.addSubmission = svc.addSubmission || function() {};
-  //   // this.updateSubmission = svc.updateSubmission || function() {};
   //   console.log('===============================');
   //   console.log('===============================');
   // }
@@ -87,9 +71,9 @@ export class EnketoFormComponent implements OnInit {
   async handleSubmit() {
     const data = this.eform.getData();
     if (this.formId) {
-      this.svc.addSubmission(data);  // .subscribe(data =>{});
+      this.svc.addSubmission(data);
     } else if(this.submissionId && this.editable !== 'false') {
-      this.svc.updateSubmission(this.submissionId, data);  // .subscribe(data =>{});
+      this.svc.updateSubmission(this.submissionId, data);
     }
   }
 }
