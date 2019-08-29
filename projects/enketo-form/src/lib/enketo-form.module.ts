@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+// import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { IEnketoFormService } from './enketo-form.interfaces';
 import { ENKETO_FORM_SERVICE } from './enketo-form.tokens';
 import { EnketoFormComponent } from './enketo-form.component';
@@ -10,15 +11,30 @@ import { EnketoFormComponent } from './enketo-form.component';
   exports: [EnketoFormComponent]
 })
 export class EnketoFormModule {
-  static forRoot(svc: IEnketoFormService): ModuleWithProviders {
+
+  // constructor(@Optional() @SkipSelf() parentModule: EnketoFormModule) {
+  //   if (parentModule) {
+  //     throw new Error('EnketoFormModule is already loaded. It should only be imported in your application\'s main module.');
+  //   }
+  // }
+
+  static forRoot(service: IEnketoFormService): ModuleWithProviders {
     return {
       ngModule: EnketoFormModule,
       providers: [
-        {
-          provide: ENKETO_FORM_SERVICE,
-          useValue: svc
-        }
+        service.enketoFormServiceProvider
+        //  || {
+        //   provide: ENKETO_FORM_SERVICE,
+        //   useValue: service.enketoFormService
+        // }
       ]
+      // providers: [
+      //   // service.enketoFormServiceProvider ||
+      //   {
+      //     provide: ENKETO_FORM_SERVICE,
+      //     useValue: service
+      //   }
+      // ]
     };
   }
 }

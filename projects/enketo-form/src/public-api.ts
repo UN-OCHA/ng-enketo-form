@@ -3,5 +3,6 @@
  */
 
 export * from './lib/enketo-form.interfaces';
+export * from './lib/enketo-form.tokens';
 export * from './lib/enketo-form.component';
 export * from './lib/enketo-form.module';

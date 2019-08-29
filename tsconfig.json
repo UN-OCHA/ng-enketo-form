@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "enketo-form": [
+        "dist/enketo-form"
+      ],
+      "enketo-form/*": [
+        "dist/enketo-form/*"
+      ]
+    }
   }
 }
