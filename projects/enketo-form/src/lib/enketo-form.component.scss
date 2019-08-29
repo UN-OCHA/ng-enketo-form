@@ -1,0 +1,81 @@
+.enketo {
+  background-color: #fff;
+  width: 100%;
+  padding: 2em;
+  border-radius: 1em;
+  /*position: relative;*/
+}
+
+.enketo .edit {
+  float: right;
+  padding-right: 2em;
+  color: #9805ff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.enketo .main {
+  margin: 0 auto;
+  padding: 0 2em 2em 4em;
+}
+
+.enketo .pages {
+  background-color: #f7f7f7;
+  text-align: left;
+}
+
+.enketo ul {
+  text-decoration: none;
+}
+
+.enketo ul > li {
+  font-size: 1.25em;
+  display: inline-block;
+  /*margin-right: 3em;*/
+  /*padding: .5em 0;*/
+  text-decoration: underline;
+}
+
+.form-footer {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  /*border: 10px solid red;*/
+  position: relative;
+  padding: 1em 0;
+}
+
+.form-footer .footer-nav {
+}
+
+.enketo .previous-page {
+  position: absolute;
+  left: -1.5em;
+  top: 0;
+}
+
+.enketo .next-page {
+  position: absolute;
+  right: -1.5em;
+  top: 0;
+}
+
+.enketo #submit-form {
+  position: absolute;
+  right: -1.5em;
+  top: 0;
+}
+
+#form-title {
+  background-color: #fff !important;
+}
+
+.editable .or-group > h4,
+.editable .or-repeat > h4 {
+  border-bottom: 3px solid #9805ff;
+}
+
+.btn-update {
+  background-color: #9805ff !important;
+}

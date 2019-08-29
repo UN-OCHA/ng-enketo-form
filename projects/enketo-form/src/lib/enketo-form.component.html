@@ -1,0 +1,19 @@
+<div class="enketo editable" id="form">
+  <div class="edit">{{mode}}</div>
+  <div class="main">
+    <div class="container pages"></div>
+    <section class="form-footer end">
+      <div class="form-footer__content">
+        <div class="form-footer__content__main-controls">
+          <button type="button" (click)="handleSubmit()"
+            class="btn btn-primary" id="submit-form">
+            <i class="icon icon-check"> </i>Submit
+          </button>
+          <button class="btn btn-default previous-page disabled">Prev</button>
+          <button type="button" (click)="handleSubmit()"
+            class="btn btn-primary next-page disabled">Next</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
