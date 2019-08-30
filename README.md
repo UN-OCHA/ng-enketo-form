@@ -17,12 +17,12 @@ yarn add ng-enketo-form
 
 The `enketo-form` module allows to capture, edit and view form data.
 
-#### First. Configure the enketo module in your app.
+#### First. Add and configure the EnketoFormModule in your app.
 
 ```js
 import { EnketoFormModule } from 'ng-enketo-form';
 import { ENKETO_FORM_SERVICE } from 'ng-enketo-form';
-import { EnketoFormService } from '../services/enketo-form.service';
+import { EnketoFormService } from '../services/enketo-form.service';// your service
 
 @NgModule({
   declarations: [
@@ -32,12 +32,12 @@ import { EnketoFormService } from '../services/enketo-form.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    `EnketoFormModule.forRoot({
+    EnketoFormModule.forRoot({
       enketoFormServiceProvider: {
         provide: ENKETO_FORM_SERVICE,
         useClass: EnketoFormService
       }
-    })`
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -45,7 +45,7 @@ import { EnketoFormService } from '../services/enketo-form.service';
 export class AppModule { }
 ```
 
-#### Second. Provide your implementation for the enketo form service.
+#### Second. Provide your implementation for the IEnketoFormService interface.
 ```js
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -83,20 +83,19 @@ export class EnketoFormService implements IEnketoFormService {
   <enketo-form submissionId="123" editable="false"></enketo-form> // To view submission (read only)
 ```
 
-## Service Interface: IEnketoFormService
+## IEnketoFormService
 
-### `getForm(formId: string): Observable<any>`
+#### `getForm(formId: string): Observable<any>`
 Returns a form that was generated with the `enketo-transformer` library.
 
-### `getSubmission(submissionId: string): Observable<any>`
+#### `getSubmission(submissionId: string): Observable<any>`
 Returns the submission captured in addSubmission; it also includes the form used to capture the data.
 
-### `addSubmission(data: string): Observable<any>`
+#### `addSubmission(data: string): Observable<any>`
 Provides the data captured from the form when clicking the submit button.
 
-### `updateSubmission(submissionId: string, data: string): Observable<any>`
+#### `updateSubmission(submissionId: string, data: string): Observable<any>`
 Provides the data captured from the form when clicking the update button.
-
 
 ## Run local demo app
 ```
@@ -113,7 +112,7 @@ npm publish --tag beta
 ```
 
 ## TODO
-1. Add tests.
+1. Add tests/travis.
 2. Provide default css to identify the elements that can be overwritten. The demo app currently styles the form with demo-app/src/assets/styles/grid.css
 3. Enhance service to define the type of the observable responses/returns.
 4. Extend service interface with addFile/getFile or something similar to support file attachments (images, etc).
