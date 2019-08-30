@@ -6,18 +6,22 @@ Enketo Form for Angular 7
 ## Installation
 
 ```
+# Installation with npm
 npm install ng-enketo-form
+
+# Installation with yarn
+yarn add ng-enketo-form
 ```
 
 ## Usage
 
 The `enketo-form` module allows to capture, edit and view form data.
 
-### First. Configure the module in your app.
+#### First. Configure the enketo module in your app.
 
 ```js
-import { EnketoFormModule } from 'enketo-form';
-import { ENKETO_FORM_SERVICE } from 'enketo-form';
+import { EnketoFormModule } from 'ng-enketo-form';
+import { ENKETO_FORM_SERVICE } from 'ng-enketo-form';
 import { EnketoFormService } from '../services/enketo-form.service';
 
 @NgModule({
@@ -28,12 +32,12 @@ import { EnketoFormService } from '../services/enketo-form.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    EnketoFormModule.forRoot({
+    `EnketoFormModule.forRoot({
       enketoFormServiceProvider: {
         provide: ENKETO_FORM_SERVICE,
         useClass: EnketoFormService
       }
-    })
+    })`
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -41,9 +45,12 @@ import { EnketoFormService } from '../services/enketo-form.service';
 export class AppModule { }
 ```
 
-### Second. Provide your service implementation.
+#### Second. Provide your implementation for the enketo form service.
 ```js
-import { IEnketoFormService } from 'enketo-form';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from "rxjs";
+import { IEnketoFormService } from 'ng-enketo-form';
 
 @Injectable()
 export class EnketoFormService implements IEnketoFormService {
@@ -68,10 +75,46 @@ export class EnketoFormService implements IEnketoFormService {
 }
 ```
 
-### Lastly. Render the form.
+#### Lastly. Render the form.
 
 ```html
   <enketo-form formId="form1"></enketo-form> // To capture data
   <enketo-form submissionId="123"></enketo-form> // To edit data
-  <enketo-form submissionId="123" editable="false"></enketo-form> // Read only
+  <enketo-form submissionId="123" editable="false"></enketo-form> // To view submission (read only)
 ```
+
+## Service Interface: IEnketoFormService
+
+### `getForm(formId: string): Observable<any>`
+Returns a form that was generated with the `enketo-transformer` library.
+
+### `getSubmission(submissionId: string): Observable<any>`
+Returns the submission captured in addSubmission; it also includes the form used to capture the data.
+
+### `addSubmission(data: string): Observable<any>`
+Provides the data captured from the form when clicking the submit button.
+
+### `updateSubmission(submissionId: string, data: string): Observable<any>`
+Provides the data captured from the form when clicking the update button.
+
+
+## Run local demo app
+```
+npm i
+ng serve demo-app
+```
+
+## Publish this library
+```sh
+//update version in projects/enketo-form/src/package.json
+ng build enketo-form
+cd dist/enketo-form
+npm publish --tag beta
+```
+
+## TODO
+1. Add tests.
+2. Provide default css to identify the elements that can be overwritten. The demo app currently styles the form with demo-app/src/assets/styles/grid.css
+3. Enhance service to define the type of the observable responses/returns.
+4. Extend service interface with addFile/getFile or something similar to support file attachments (images, etc).
+5. Extend service interface to provide getExternal or similar to support external data options; select options driven with dynamic data.

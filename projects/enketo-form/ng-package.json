@@ -8,5 +8,9 @@
       "underscore": "_",
       "enketo-core": "enketo-core"
     }
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "underscore",
+    "enketo-core"
+  ]
 }
