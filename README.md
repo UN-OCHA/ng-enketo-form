@@ -1,27 +1,77 @@
 # NgEnketoForm
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+Enketo Form for Angular 7
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+```
+npm install ng-enketo-form
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
 
-## Build
+The `enketo-form` module allows to capture, edit and view form data.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### First. Configure the module in your app.
 
-## Running unit tests
+```js
+import { EnketoFormModule } from 'enketo-form';
+import { ENKETO_FORM_SERVICE } from 'enketo-form';
+import { EnketoFormService } from '../services/enketo-form.service';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    EnketoFormModule.forRoot({
+      enketoFormServiceProvider: {
+        provide: ENKETO_FORM_SERVICE,
+        useClass: EnketoFormService
+      }
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Running end-to-end tests
+### Second. Provide your service implementation.
+```js
+import { IEnketoFormService } from 'enketo-form';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@Injectable()
+export class EnketoFormService implements IEnketoFormService {
 
-## Further help
+  constructor(private http: HttpClient) {}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  getForm(formId: string): Observable<any> {
+    return this.http.get('assets/form-sample.json');
+  }
+
+  getSubmission(id: string): Observable<any> {
+    ...
+  }
+
+  addSubmission(data: any): Observable<any> {
+    ...
+  }
+
+  updateSubmission(submissionId: string, data: any): Observable<any> {
+    ...
+  }
+}
+```
+
+### Lastly. Render the form.
+
+```html
+  <enketo-form formId="form1"></enketo-form> // To capture data
+  <enketo-form submissionId="123"></enketo-form> // To edit data
+  <enketo-form submissionId="123" editable="false"></enketo-form> // Read only
+```
