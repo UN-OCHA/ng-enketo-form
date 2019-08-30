@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { IEnketoFormService } from './enketo-form.interfaces';
+import { IEnketoFormServiceProvider } from './enketo-form.interfaces';
 
-export const ENKETO_FORM_SERVICE = new InjectionToken<IEnketoFormService>(
+export const ENKETO_FORM_SERVICE = new InjectionToken<IEnketoFormServiceProvider>(
   'ENKETO_FORM_SERVICE'
 );

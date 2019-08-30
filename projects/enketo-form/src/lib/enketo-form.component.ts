@@ -23,13 +23,6 @@ export class EnketoFormComponent implements OnInit {
   private eform: any;
 
   constructor(@Inject(ENKETO_FORM_SERVICE) private svc: IEnketoFormService) { }
-  // constructor(@Inject(ENKETO_FORM_SERVICE) private svc: any) {
-  //   console.log('===============================');
-  //   console.log('===============================');
-  //   console.log(svc);
-  //   console.log('===============================');
-  //   console.log('===============================');
-  // }
 
   currentMode() {
     if(!this.submissionId) {
