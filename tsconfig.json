@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "enketo-form": [
+      "ng-enketo-form": [
         "dist/enketo-form"
       ],
-      "enketo-form/*": [
+      "ng-enketo-form/*": [
         "dist/enketo-form/*"
       ]
     }

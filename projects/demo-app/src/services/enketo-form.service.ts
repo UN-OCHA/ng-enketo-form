@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 
-import { IEnketoFormService } from 'enketo-form';
+import { IEnketoFormService } from 'ng-enketo-form';
 
 const FORM_URL = "https://forms-app-xslx-dev.s3.amazonaws.com/public";
 const SUBMISSION_URL = "https://yqtqjifgk0.execute-api.us-east-1.amazonaws.com/dev/xsubmissions";

@@ -100,6 +100,7 @@ Provides the data captured from the form when clicking the update button.
 ## Run local demo app
 ```
 npm i
+ng build enketo-form
 ng serve demo-app
 ```
 
