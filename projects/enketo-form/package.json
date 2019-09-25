@@ -1,12 +1,13 @@
 {
   "name": "ng-enketo-form",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.7",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
   },
   "dependencies": {
     "enketo-core": "^5.6.0",
+    "ngx-markdown": "^8.1.0",
     "underscore": "^1.9.1"
   }
 }

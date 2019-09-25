@@ -6,11 +6,13 @@
     "umdModuleIds": {
       "jquery": "$",
       "underscore": "_",
-      "enketo-core": "enketo-core"
+      "enketo-core": "enketo-core",
+      "ngx-markdown": "ngx-markdown"
     }
   },
   "whitelistedNonPeerDependencies": [
     "underscore",
-    "enketo-core"
+    "enketo-core",
+    "ngx-markdown"
   ]
 }
