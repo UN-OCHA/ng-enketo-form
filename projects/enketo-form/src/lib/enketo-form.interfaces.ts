@@ -6,8 +6,8 @@ export interface IEnketoFormServiceProvider {
 }
 
 export interface IEnketoFormService {
-  getForm(formId: string): Observable<any>;
-  getSubmission(submissionId: string): Observable<any>;
-  addSubmission(data: string): Observable<any>;
-  updateSubmission(submissionId: string, data: string): Observable<any>;
+  getForm(formId: any): Observable<any>;
+  getSubmission(formId: any, submissionId: any): Observable<any>;
+  addSubmission(formId: any, submissionId: any, data: string): Observable<any>;
+  updateSubmission(formId: any, submissionId: any, data: string): Observable<any>;
 }

@@ -37,28 +37,32 @@ export class EnketoFormComponent implements OnInit {
     return 'EDIT MODE';
   }
 
+  private html(form) {
+    const html = $(form);
+    const that = this;
+    $('.question-label', html).each(function (idx) {
+      $(this).html(that.md.compile($(this).text()));
+    });
+    return html;
+  }
+
   async ngOnInit() {
     this.mode = this.currentMode();
 
-    if(this.formId) {
-      this.svc.getForm(this.formId).subscribe(xdata => {
-        const html = $(xdata.form);
-        const that = this;
-        $('.question-label', html).each(function (idx) {
-          $(this).html(that.md.compile($(this).text()));
-        });
-        this.eform = new EnketoForm(html, xdata.model, null);
-      });
-    } else {
-      this.svc.getSubmission(this.submissionId).subscribe(data => {
+    if(this.formId && this.submissionId) {
+      this.svc.getSubmission(this.formId, this.submissionId).subscribe(data => {
         this.xform = {name: data.form, content: data.content, loading: false}
         this.svc.getForm(this.xform.name).subscribe(xdata => {
           const content = JSON.parse(this.xform.content);
-          this.eform = new EnketoForm(xdata.form, xdata.model, content);
+          this.eform = new EnketoForm(this.html(xdata.form), xdata.model, content);
           if(this.editable === 'false') {
             this.disableInputs();
           }
         });
+      });
+    } else if(this.formId) {
+      this.svc.getForm(this.formId).subscribe(xdata => {
+        this.eform = new EnketoForm(this.html(xdata.form), xdata.model, null);
       });
     }
   }
@@ -72,9 +76,9 @@ export class EnketoFormComponent implements OnInit {
   async handleSubmit() {
     const data = this.eform.getData();
     if (this.formId) {
-      this.svc.addSubmission(data);
+      this.svc.addSubmission(this.formId, this.submissionId, data);
     } else if(this.submissionId && this.editable !== 'false') {
-      this.svc.updateSubmission(this.submissionId, data);
+      this.svc.updateSubmission(this.formId, this.submissionId, data);
     }
   }
 }
