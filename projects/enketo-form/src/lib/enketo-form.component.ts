@@ -40,10 +40,12 @@ export class EnketoFormComponent implements OnInit {
   private html(form) {
     const html = $(form);
     const that = this;
-    $('.question-label', html).each(function (idx) {
-      const text = $(this).text().replace(/\n/g, '<br />');
-      $(this).html(that.md.compile(text));
-    });
+    for(let selector of ['.question-label', '.question > .or-hint']) {
+      $(selector, html).each(function (idx) {
+        const text = $(this).text().replace(/\n/g, '<br />');
+        $(this).html(that.md.compile(text));
+      });
+    }
     return html;
   }
 
