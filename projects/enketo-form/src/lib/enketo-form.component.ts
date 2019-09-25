@@ -2,6 +2,7 @@ import $ from 'jquery';
 import { Form } from 'enketo-core';
 import { Component, Input, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MarkdownService } from 'ngx-markdown';
 import { IEnketoFormService } from './enketo-form.interfaces';
 import { ENKETO_FORM_SERVICE } from './enketo-form.tokens';
 import EnketoForm from './enketo-form';
@@ -22,7 +23,9 @@ export class EnketoFormComponent implements OnInit {
   private xform: any;
   private eform: any;
 
-  constructor(@Inject(ENKETO_FORM_SERVICE) private svc: IEnketoFormService) { }
+  constructor(
+    @Inject(ENKETO_FORM_SERVICE) private svc: IEnketoFormService,
+    private md: MarkdownService) { }
 
   currentMode() {
     if(!this.submissionId) {
@@ -39,7 +42,12 @@ export class EnketoFormComponent implements OnInit {
 
     if(this.formId) {
       this.svc.getForm(this.formId).subscribe(xdata => {
-        this.eform = new EnketoForm(xdata.form, xdata.model, null);
+        const html = $(xdata.form);
+        const that = this;
+        $('.question-label', html).each(function (idx) {
+          $(this).html(that.md.compile($(this).text()));
+        });
+        this.eform = new EnketoForm(html, xdata.model, null);
       });
     } else {
       this.svc.getSubmission(this.submissionId).subscribe(data => {

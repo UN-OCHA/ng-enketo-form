@@ -1,11 +1,14 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { MarkdownModule } from 'ngx-markdown';
 import { IEnketoFormServiceProvider } from './enketo-form.interfaces';
 import { ENKETO_FORM_SERVICE } from './enketo-form.tokens';
 import { EnketoFormComponent } from './enketo-form.component';
 
+
 @NgModule({
   declarations: [EnketoFormComponent],
   imports: [
+    MarkdownModule.forRoot()
   ],
   exports: [EnketoFormComponent]
 })

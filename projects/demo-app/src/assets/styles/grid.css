@@ -8715,3 +8715,8 @@ h4 + .or-repeat {
     background-position: -1px; }
   input[type=radio]:checked + .option-label::before {
     background-position: 0; } }
+
+.enketo p {
+  display: inline;
+  margin: 0;
+}

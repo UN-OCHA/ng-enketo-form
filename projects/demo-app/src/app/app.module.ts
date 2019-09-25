@@ -5,8 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { EnketoFormModule } from 'ng-enketo-form';
-import { ENKETO_FORM_SERVICE } from 'ng-enketo-form';
+import { EnketoFormModule } from 'projects/enketo-form/src/lib/enketo-form.module';
+import { ENKETO_FORM_SERVICE } from 'projects/enketo-form/src/lib/enketo-form.tokens';
 import { EnketoFormService } from '../services/enketo-form.service';
 
 @NgModule({

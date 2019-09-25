@@ -79,7 +79,8 @@ class EnketoForm {
   private form: Form;
 
   constructor(html, modelStr, content, external=undefined) {
-    $('.container').replaceWith($(html));
+    $('.container').replaceWith(html);
+
     this.form = new Form($('#form').find('form').first(), {
       modelStr,
       instanceStr: bindDataToModel(modelStr, content),
