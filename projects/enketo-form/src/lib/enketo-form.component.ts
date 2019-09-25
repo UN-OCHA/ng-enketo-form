@@ -41,7 +41,8 @@ export class EnketoFormComponent implements OnInit {
     const html = $(form);
     const that = this;
     $('.question-label', html).each(function (idx) {
-      $(this).html(that.md.compile($(this).text()));
+      const text = $(this).text().replace(/\n/g, '<br />');
+      $(this).html(that.md.compile(text));
     });
     return html;
   }
